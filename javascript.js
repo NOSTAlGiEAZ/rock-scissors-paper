@@ -24,7 +24,7 @@ function getComputerChoice() {
 
 function playRound(playerChoice, computerChoice) {
   const result = playerChoice == computerChoice 
-    ? `Tie. Score: ${++score.player}-${++score.computer}`
+    ? `Tie. Score: ${score.player}-${score.computer}`
     : WINNING_COMBINATIONS[playerChoice] == computerChoice
     ? `You Win! ${playerChoice} beats ${computerChoice}. Score: ${++score.player}-${score.computer}`
     : `You Lose! ${computerChoice} beats ${playerChoice}. Score: ${score.player}-${++score.computer}`;
@@ -41,13 +41,11 @@ function game() {
       alert(`Can you type PROPERLY?? Choose between: ${CHOICES}`)
     }
   }
-  const result = score.player == score.computer
-    ? 'That\'s a Tie! What a DRAMA.'
-    : score.computer < score.player
+  const result = score.computer < score.player
     ? 'Huh, you won... You are just being lucky :c'
     : 'You LOST! Get better FOOL!';
   alert(result);
-}
+
 
 game();
 
