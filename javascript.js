@@ -45,7 +45,7 @@ function game() {
     ? 'Huh, you won... You are just being lucky :c'
     : 'You LOST! Get better FOOL!';
   alert(result);
-
+}
 
 game();
 
