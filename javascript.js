@@ -10,6 +10,7 @@ const WINNING_COMBINATIONS = {
   'paper': 'rock'
 };
 
+
 function getRandom(max=1){
   return (Math.random() * max);
 }
@@ -31,21 +32,29 @@ function playRound(playerChoice, computerChoice) {
   return result;
 }
 
-function game() {
-  while (score.computer < 3 && score.player < 3) {
-    const playerChoice = prompt('Your choice: ').trim().toLowerCase();
-    if (CHOICES.includes(playerChoice)) {
-      const computerChoice = getComputerChoice();
-      alert(playRound(playerChoice, computerChoice));
-    } else {
-      alert(`Can you type PROPERLY?? Choose between: ${CHOICES}`)
+function game(playerChoice) {
+    const computerChoice = getComputerChoice();
+    const container = document.querySelector('#container');
+    const results = document.createElement('h3');
+    results.textContent = playRound(playerChoice, computerChoice);
+    if (container.hasChildNodes()) {
+      container.lastChild.remove();
     }
-  }
-  const result = score.computer < score.player
-    ? 'Huh, you won... You are just being lucky :c'
-    : 'You LOST! Get better FOOL!';
-  alert(result);
+    container.appendChild(results);
+    if (score.player > 2 || score.computer > 2) {
+      if (score.player > score.computer) {
+        results.textContent = `You Won a game ! Score: ${score.player}-${score.computer}. You can continue playing..`;
+      } else {
+        results.textContent = `You Lost a game ! Score: ${score.player}-${score.computer}. You can continue playing..`;
+      }
+      score.player = 0;
+      score.computer = 0;
+    }
 }
 
-game();
-
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    game(button.id);
+  })
+});
